@@ -3,15 +3,15 @@
 #include<string>
 #include<cstdio>
 using namespace std;
-
+bool none = false;
 const int tableSize = 200;
 class HashTableItem{
    public:
       int x;
-      int y;
-   HashTableItem(int x, int y){
+      void* y;
+   HashTableItem(int x, void* inp){
       this -> x = x;
-      this -> y = y;
+      this -> y = inp;
    }
 };
 class HashMapTable {
@@ -27,7 +27,7 @@ class HashMapTable {
       int HashFunc(int x) {
          return x % tableSize;
       }
-      void Insert(int x, int y) {
+      void Insert(int x, void* y) {
          int h = HashFunc(x);
          while (t[h] != NULL && t[h]->x != x) {
             h = HashFunc(h + 1);
@@ -36,13 +36,13 @@ class HashMapTable {
             delete t[h];
          t[h] = new HashTableItem(x, y);
       }
-      int SearchKey(int x) {
+      void* SearchKey(int x) {
          int h = HashFunc(x);
          while (t[h] != NULL && t[h]->x != x) {
             h = HashFunc(h + 1);
          }
          if (t[h] == NULL)
-            return -1;
+            return &none;
          else
             return t[h]->y;
       }
