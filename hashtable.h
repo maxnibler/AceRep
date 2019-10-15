@@ -1,71 +1,52 @@
+//Maximillian H Nibler
+//max.nibler@gmail.com
+//https://github.com/maxnibler/
+
 #include<iostream>
 #include<cstdlib>
 #include<string>
 #include<cstdio>
+//#include "linkList.h"
+#define SIZE 200
+
 using namespace std;
-bool none = false;
-const int tableSize = 200;
-class HashTableItem{
-   public:
-      int x;
-      void* y;
-   HashTableItem(int x, void* inp){
-      this -> x = x;
-      this -> y = inp;
-   }
-};
-class HashMapTable {
-   private:
-      HashTableItem **t;
-   public:
-      HashMapTable() {
-         t = new HashTableItem * [tableSize];
-         for (int i = 0; i< tableSize; i++) {
-            t[i] = NULL;
-         }
-      }
-      int HashFunc(int x) {
-         return x % tableSize;
-      }
-      void Insert(int x, void* y) {
-         int h = HashFunc(x);
-         while (t[h] != NULL && t[h]->x != x) {
-            h = HashFunc(h + 1);
-         }
-         if (t[h] != NULL)
-            delete t[h];
-         t[h] = new HashTableItem(x, y);
-      }
-      void* SearchKey(int x) {
-         int h = HashFunc(x);
-         while (t[h] != NULL && t[h]->x != x) {
-            h = HashFunc(h + 1);
-         }
-         if (t[h] == NULL)
-            return &none;
-         else
-            return t[h]->y;
-      }
-      void Remove(int x) {
-         int h = HashFunc(x);
-         while (t[h] != NULL) {
-            if (t[h]->x == x)
-               break;
-            h = HashFunc(h + 1);
-         }
-         if (t[h] == NULL) {
-            cout<<"No Element found at key "<<x<<endl;
-            return;
-         } else {
-            delete t[h];
-         }
-         cout<<"Element Deleted"<<endl;
-      }
-      ~HashMapTable() {
-         for (int i = 0; i < tableSize; i++) {
-            if (t[i] != NULL)
-               delete t[i];
-               delete[] t;
-         }
-      }
+
+class hashtable{
+private:
+  linkedList table[SIZE];
+public:
+  hashtable(){
+    for (int i = 0; i < SIZE; i++){
+      table[i] = linkedList();
+    }
+  }
+
+  void add(string skey, void* d){
+    int key = hash(skey);
+    int index = key % SIZE;
+    table[index].insert(key, d);
+  }
+
+  void* get(string skey){
+    int key = hash(skey);
+    int index = key % SIZE;
+    return table[index].find(key);
+  }
+
+  void remove(string skey){
+    int key = hash(skey);
+    int index = key % SIZE;
+    return table[index].remove(key);
+  }
+  
+  int hash(string str){
+    int length = str.length();
+    int total = 0, x;
+    for (int i = 0; i < length; i++){
+      x = static_cast<int>(str[i]);
+      x *= i+10;
+      total += x;
+    }
+    return total;
+  }
 };
