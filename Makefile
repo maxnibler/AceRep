@@ -1,4 +1,4 @@
-OBJ = main.o roll.o
+OBJ = main.o roll.o input.o screen.o
 GPP = clang++
 FLAG = -std=gnu++17 -Wall -Wextra -Wpedantic -Wold-style-cast
 EXEC = game

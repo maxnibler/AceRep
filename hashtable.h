@@ -2,11 +2,7 @@
 //max.nibler@gmail.com
 //https://github.com/maxnibler/
 
-#include<iostream>
-#include<cstdlib>
 #include<string>
-#include<cstdio>
-//#include "linkList.h"
 #define SIZE 200
 
 using namespace std;
