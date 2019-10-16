@@ -1,0 +1,25 @@
+//Maximillian H Nibler
+//max.nibler@gmail.com
+//https://github.com/maxnibler/
+
+#include <string>
+#include <iostream>
+#include "screen.h"
+#define HEIGHT 6
+#define WIDTH 14
+using namespace std;
+
+void setScreen(){
+  for (int i = 0; i < HEIGHT; i++){
+    for (int j = 0; j < WIDTH; j++){
+      if (i == 0 || i == HEIGHT - 1){
+	cout << '#';
+      }else if (j == 0 || j == WIDTH - 1){
+	cout << '#';
+      }else{
+	cout << ' ';
+      }
+    }
+    cout << endl;
+  }
+}

@@ -1,0 +1,6 @@
+
+void stdSeed();
+
+void seed();
+
+int roll();
