@@ -17,8 +17,16 @@
 using namespace std;
 
 int main (/*int argc, char* argv[]*/){
+  initscr();
+  timeout(-1);
+  
   initLocation();
   setScreen();
-  //getch();
+  
+  //CursesWindow w(stdscr);
+  int c = getch();
+  endwin();
+  cout << c << endl;
   //getDirection();
+  return 0;
 }

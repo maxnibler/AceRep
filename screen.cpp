@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include "screen.h"
+#include <curses.h>
 #define HEIGHT 20
 #define WIDTH 60
 using namespace std;
@@ -24,6 +25,8 @@ char getSymbol(int x, int y){
 }
 
 void setScreen(){
+  initscr();
+  timeout(-1);
   for (int i = 0; i < HEIGHT; i++){
     for (int j = 0; j < WIDTH; j++){
       if (i == 0 || i == HEIGHT - 1){
