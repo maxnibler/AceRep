@@ -19,6 +19,6 @@ void seed(int x){
   srand(x);
 }
 int roll (int dX){
-  int die = rand()%dX;
+  int die = rand()%dX+1;
   return die;
 }

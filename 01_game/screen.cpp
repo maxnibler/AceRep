@@ -11,6 +11,7 @@ using namespace std;
 char location[WIDTH][HEIGHT];
 
 Piece player;
+Piece enemy;
 
 void initLocation(){
   initscr();
@@ -23,7 +24,8 @@ void initLocation(){
       }else{
 	location[i][j] = '-';
       }
-      player.setLocation(30, 10, 'O');
+       player.setLocation(30, 10, 'O', "Player");
+       enemy.setLocation(10, 10, 'X', "Enemy");
     }
   }
   refresh();
@@ -39,16 +41,28 @@ void setScreen(){
       mvprintw(i,j, "%c", getSymbol(j,i));
     }
   }
+  mvprintw(0,0, "[");
+  mvprintw(0,WIDTH-1, "]");
 }
 
+void clearMessage(){
+  mvprintw(0,1, "");
+  for (int i = 0; i < WIDTH-2; i++){
+    printw(" ");
+  }
+}
+
+
 void printMessage(string mess){
-  mvprintw(0,0, "%s", mess.c_str());
+  clearMessage();
+  mvprintw(0,1, "%s", mess.c_str());
 }
 
 void refreshScreen(){
-  player.move();
+  playerMove(&player);
+  aiMove(&enemy);
   setScreen();
-  printMessage("Test Message");
+  //printMessage(player.getStatus());
   refresh();
 }
 

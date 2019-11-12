@@ -1,3 +1,5 @@
+#include <string>
+
 extern bool active;
 
 class Piece{
@@ -7,16 +9,22 @@ class Piece{
   int yCoor;
   int prevY;
   char rep;
- public:
-  void setLocation(int x, int y, char o);
+  std::string status;
+  std::string name;
   void horMove(int dist);
   void verMove(int dist);
-  int getY();
-  int getX();
+ public:
+  void setLocation(int x, int y, char o, std::string n);
+  std::string getStatus();
   char getChar();
-  void move();
+  void inpMove(char dir);
+  void enemyMove();
 };
 
+void playerMove(Piece* p);
 
+void aiMove(Piece* p);
 
-char getDirection();
+char getInput();
+
+extern Piece player;

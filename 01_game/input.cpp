@@ -3,21 +3,22 @@
 //https://github.com/maxnibler/
 
 #include <iostream>
-#include <string>
 #include <stdio.h>
 #include <fstream>
 #include <ncurses.h>
 #include "input.h"
 #include "screen.h"
+#include "roll.h"
 #define DNUM 4
 
 using namespace std;
 
-void Piece::setLocation(int x, int y, char o){
+void Piece::setLocation(int x, int y, char o, string n){
   xCoor = x;
   yCoor = y;
   rep = o;
   location[x][y] = o;
+  name = n;
 }
 
 void Piece::horMove(int dist){
@@ -32,29 +33,38 @@ void Piece::verMove(int dist){
   yCoor = (yCoor + dist) % HEIGHT;
 }
 
-int Piece::getY(){
-  return yCoor;
-}
-
-int Piece::getX(){
-  return xCoor;
+string Piece::getStatus(){
+  return status;
 }
 
 char Piece::getChar(){
   return rep;
 }
 
-void Piece::move(){
-  char dir = getDirection();
+void Piece::inpMove(char dir){
   location[xCoor][yCoor] = '-';
-  if (dir == 'w') this->verMove(-1);
-  if (dir == 'a') this->horMove(-1);
-  if (dir == 's') this->verMove(1);
-  if (dir == 'd') this->horMove(1);
+  if (dir == 'w') verMove(-1);
+  if (dir == 'a') horMove(-1);
+  if (dir == 's') verMove(1);
+  if (dir == 'd') horMove(1);
+  printMessage("Player coordinates "
+	       +to_string(xCoor)+" "+to_string(yCoor));
   location[xCoor][yCoor] = rep;
 }
 
-char getDirection(){
+void Piece::enemyMove(){
+  location[xCoor][yCoor] = '-';
+  int face = roll(4);
+  switch(face){
+    case 1 : verMove(-1);
+    case 2 : verMove(1);
+    case 3 : horMove(-1);
+    case 4 : horMove(1);
+  }
+  location[xCoor][yCoor] = rep;
+}
+
+char getInput(){
   char dir = getch();
   switch(dir){
     case 'w' : return dir;
@@ -66,5 +76,15 @@ char getDirection(){
       return dir;
     }
   }
-  return getDirection();
+  return getInput();
 }
+
+void playerMove(Piece* p){
+  char dir = getInput();
+  p->inpMove(dir);
+}
+
+void aiMove(Piece* p){
+  p->enemyMove();
+}
+
