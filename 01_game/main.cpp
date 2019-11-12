@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fstream>
-#include <curses.h>
+#include <ncurses.h>
 #include "roll.h"
 #include "linkList.h"
 #include "hashtable.h"
@@ -17,8 +17,15 @@
 using namespace std;
 
 int main (/*int argc, char* argv[]*/){
+  initscr();
+  raw();
+  keypad(stdscr, TRUE);
+  noecho();
   initLocation();
   setScreen();
-  //getch();
+  bool active = true;
+  while (active)
+  refreshScreen();
+  endwin();
   //getDirection();
 }
