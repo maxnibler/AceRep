@@ -14,6 +14,7 @@
 #include "input.h"
 #include "screen.h"
 
+bool active;
 using namespace std;
 
 int main (/*int argc, char* argv[]*/){
@@ -23,9 +24,10 @@ int main (/*int argc, char* argv[]*/){
   noecho();
   initLocation();
   setScreen();
-  bool active = true;
-  while (active)
-  refreshScreen();
+  active = true;
+  while(active){
+    refreshScreen();
+  }
   endwin();
   //getDirection();
   return 0;

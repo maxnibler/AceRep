@@ -8,6 +8,7 @@
 #include <fstream>
 #include <ncurses.h>
 #include "input.h"
+#include "screen.h"
 #define DNUM 4
 
 using namespace std;
@@ -19,11 +20,15 @@ void Piece::setLocation(int x, int y, char o){
 }
 
 void Piece::horMove(int dist){
-  xCoor += dist;
+  if (xCoor + dist < 1 || xCoor + dist >= WIDTH-1) return;
+  prevX = xCoor;
+  xCoor = (xCoor + dist) % WIDTH;
 }
 
 void Piece::verMove(int dist){
-  yCoor -= dist;
+  if (yCoor + dist < 1 || yCoor + dist >= HEIGHT-1) return;
+  prevY = yCoor;
+  yCoor = (yCoor + dist) % HEIGHT;
 }
 
 int Piece::getY(){
@@ -40,10 +45,12 @@ char Piece::getChar(){
 
 void Piece::move(){
   char dir = getDirection();
-  if (dir == 'w') this->verMove(1);
+  location[xCoor][yCoor] = '-';
+  if (dir == 'w') this->verMove(-1);
   if (dir == 'a') this->horMove(-1);
-  if (dir == 's') this->verMove(-1);
+  if (dir == 's') this->verMove(1);
   if (dir == 'd') this->horMove(1);
+  location[xCoor][yCoor] = rep;
 }
 
 char getDirection(){
@@ -54,7 +61,8 @@ char getDirection(){
     case 's' : return dir;
     case 'd' : return dir;
     case 'p' : {
-      endwin();
+      active = false;
+      return dir;
     }
   }
   return getDirection();
