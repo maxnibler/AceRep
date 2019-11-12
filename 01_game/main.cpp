@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fstream>
-#include <curses.h>
+#include <ncurses.h>
 #include "roll.h"
 #include "linkList.h"
 #include "hashtable.h"
@@ -18,6 +18,7 @@ using namespace std;
 
 int main (/*int argc, char* argv[]*/){
   initscr();
+<<<<<<< HEAD:main.cpp
   timeout(-1);
   
   initLocation();
@@ -27,6 +28,17 @@ int main (/*int argc, char* argv[]*/){
   int c = getch();
   endwin();
   cout << c << endl;
+=======
+  raw();
+  keypad(stdscr, TRUE);
+  noecho();
+  initLocation();
+  setScreen();
+  bool active = true;
+  while (active)
+  refreshScreen();
+  endwin();
+>>>>>>> 13370e210aea4a305858e4c6825744c00ba69410:01_game/main.cpp
   //getDirection();
   return 0;
 }
