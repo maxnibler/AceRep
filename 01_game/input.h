@@ -19,6 +19,8 @@ class Piece{
   char getChar();
   void inpMove(char dir);
   void enemyMove();
+  int pieceUp(int y);
+  int pieceLeft(int x);
 };
 
 void playerMove(Piece* p);

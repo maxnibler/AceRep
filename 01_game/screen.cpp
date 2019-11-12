@@ -6,6 +6,7 @@
 #include <ncurses.h>
 #include "screen.h"
 #include "input.h"
+
 using namespace std;
 
 char location[WIDTH][HEIGHT];
@@ -59,8 +60,8 @@ void printMessage(string mess){
 }
 
 void refreshScreen(){
-  playerMove(&player);
   aiMove(&enemy);
+  playerMove(&player);
   setScreen();
   //printMessage(player.getStatus());
   refresh();
