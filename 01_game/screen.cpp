@@ -6,11 +6,7 @@
 #include <iostream>
 #include <ncurses.h>
 #include "screen.h"
-<<<<<<< HEAD:screen.cpp
-#include <curses.h>
-=======
 #include "input.h"
->>>>>>> 13370e210aea4a305858e4c6825744c00ba69410:01_game/screen.cpp
 #define HEIGHT 20
 #define WIDTH 60
 using namespace std;

@@ -18,17 +18,6 @@ using namespace std;
 
 int main (/*int argc, char* argv[]*/){
   initscr();
-<<<<<<< HEAD:main.cpp
-  timeout(-1);
-  
-  initLocation();
-  setScreen();
-  
-  //CursesWindow w(stdscr);
-  int c = getch();
-  endwin();
-  cout << c << endl;
-=======
   raw();
   keypad(stdscr, TRUE);
   noecho();
@@ -38,7 +27,6 @@ int main (/*int argc, char* argv[]*/){
   while (active)
   refreshScreen();
   endwin();
->>>>>>> 13370e210aea4a305858e4c6825744c00ba69410:01_game/main.cpp
   //getDirection();
   return 0;
 }
