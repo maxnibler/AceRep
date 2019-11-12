@@ -17,6 +17,7 @@ void Piece::setLocation(int x, int y, char o){
   xCoor = x;
   yCoor = y;
   rep = o;
+  location[x][y] = o;
 }
 
 void Piece::horMove(int dist){
@@ -26,7 +27,7 @@ void Piece::horMove(int dist){
 }
 
 void Piece::verMove(int dist){
-  if (yCoor + dist < 1 || yCoor + dist >= HEIGHT-1) return;
+  if (yCoor + dist < 2 || yCoor + dist >= HEIGHT-1) return;
   prevY = yCoor;
   yCoor = (yCoor + dist) % HEIGHT;
 }
