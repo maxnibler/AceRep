@@ -9,6 +9,7 @@
 #include "input.h"
 #include "screen.h"
 #include "roll.h"
+
 #define DNUM 4
 
 using namespace std;
@@ -25,24 +26,24 @@ void Piece::setLocation(int x, int y, char o, string n){
   xCoor = x;
   yCoor = y;
   rep = o;
-  location[x][y] = o;
+  location[x][y].push(o);
   name = n;
 }
 
 void Piece::horMove(int dist){
-  location[xCoor][yCoor] = '-';
+  location[xCoor][yCoor].pop();
   if (xCoor + dist < 1 || xCoor + dist >= WIDTH-1) return;
   prevX = xCoor;
   xCoor = (xCoor + dist) % WIDTH;
-  location[xCoor][yCoor] = rep;
+  location[xCoor][yCoor].push(rep);
 }
 
 void Piece::verMove(int dist){
-  location[xCoor][yCoor] = '-';
+  location[xCoor][yCoor].pop();
   if (yCoor + dist < 2 || yCoor + dist >= HEIGHT-1) return;
   prevY = yCoor;
   yCoor = (yCoor + dist) % HEIGHT;
-  location[xCoor][yCoor] = rep;
+  location[xCoor][yCoor].push(rep);
 }
 
 string Piece::getStatus(){

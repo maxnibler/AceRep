@@ -1,8 +1,10 @@
 #include <string>
+#include "charStack.h"
 #define HEIGHT 26
 #define WIDTH 78
 
-extern char location[WIDTH][HEIGHT];
+extern charStack location[WIDTH][HEIGHT];
+//extern charStack test[5][5];
 
 void initLocation();
 

@@ -9,8 +9,6 @@
 #include <fstream>
 #include <ncurses.h>
 #include "roll.h"
-#include "linkList.h"
-#include "hashtable.h"
 #include "input.h"
 #include "screen.h"
 
@@ -30,6 +28,6 @@ int main (/*int argc, char* argv[]*/){
   }
   endwin();
   //getDirection();
-  return 0;
   
+  return 0;
 }
