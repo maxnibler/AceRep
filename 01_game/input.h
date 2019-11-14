@@ -5,9 +5,7 @@ extern bool active;
 class Piece{
  private:
   int xCoor;
-  int prevX;
   int yCoor;
-  int prevY;
   char rep;
   std::string status;
   std::string name;
@@ -21,6 +19,7 @@ class Piece{
   void enemyMove();
   int pieceUp(int y);
   int pieceLeft(int x);
+  void stay();
 };
 
 void playerMove(Piece* p);

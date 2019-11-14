@@ -21,13 +21,12 @@ int main (/*int argc, char* argv[]*/){
   keypad(stdscr, TRUE);
   noecho();
   initLocation();
+  initPieces();
   setScreen();
   active = true;
   while(active){
     refreshScreen();
   }
   endwin();
-  //getDirection();
-  
   return 0;
 }

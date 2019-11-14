@@ -14,38 +14,50 @@ charStack location[WIDTH][HEIGHT];
 Piece player;
 Piece enemy;
 
+void moveTo(int x, int y, char rep){
+  location[x][y].push(rep);
+}
+
+void initPieces(){
+  player.setLocation(30, 10, 'O', "Player");
+  enemy.setLocation(10, 10, 'X', "Enemy");
+  location[30][10].push('O');
+  location[10][10].push('X');
+}
+
 void initLocation(){
-  initscr();
   for (int i = 0; i < WIDTH; i++){
     for (int j = 0; j < HEIGHT; j++){
       if (i == 0 || i == WIDTH - 1){
-	location[i][j].push('#');
+	location[i][j].setBase('#');
       }else if (j == 1 || j == HEIGHT - 1){
-	location[i][j].push('#');
+	location[i][j].setBase('#');
       }else{
-	//location[i][j] = '-';// charStack
+	location[i][j].setBase('-');
       }
-      player.setLocation(30, 10, 'O', "Player");
-      enemy.setLocation(10, 10, 'X', "Enemy");
     }
   }
-  refresh();
 }
 
 char getSymbol(int x, int y){
+  return location[x][y].pop();
+}
+
+char lookSym(int x, int y){
   return location[x][y].peek();
 }
 
 void setScreen(){
-  for (int i = 1; i < HEIGHT; i++){
+  move(0,0);
+  for (int i = 0; i < HEIGHT; i++){
     for (int j = 0; j < WIDTH; j++){
-      mvprintw(i,j, "%c", getSymbol(j,i));
+      move(i,j);
+      addch(getSymbol(j,i));
     }
   }
-  mvprintw(0,0, "[");
-  mvprintw(0,WIDTH-1, "]");
+  refresh();
 }
-
+/*
 void clearMessage(){
   mvprintw(0,1, "");
   for (int i = 0; i < WIDTH-2; i++){
@@ -58,13 +70,13 @@ void printMessage(string mess){
   clearMessage();
   mvprintw(0,1, "%s", mess.c_str());
 }
-
+*/
 void refreshScreen(){
+  setScreen();
   aiMove(&enemy);
   playerMove(&player);
-  setScreen();
   //printMessage(player.getStatus());
-  refresh();
+  //refresh();
 }
 
 
