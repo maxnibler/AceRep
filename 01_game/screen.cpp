@@ -21,8 +21,6 @@ void moveTo(int x, int y, char rep){
 void initPieces(){
   player.setLocation(30, 10, 'O', "Player");
   enemy.setLocation(10, 10, 'X', "Enemy");
-  location[30][10].push('O');
-  location[10][10].push('X');
 }
 
 void initLocation(){
@@ -72,9 +70,9 @@ void printMessage(string mess){
 }
 */
 void refreshScreen(){
+  playerMove(&player);
   setScreen();
   aiMove(&enemy);
-  playerMove(&player);
   //printMessage(player.getStatus());
   //refresh();
 }

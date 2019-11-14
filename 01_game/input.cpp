@@ -26,7 +26,6 @@ void Piece::setLocation(int x, int y, char o, string n){
   xCoor = x;
   yCoor = y;
   rep = o;
-  moveTo(x,y,o);
   name = n;
 }
 

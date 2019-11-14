@@ -29,3 +29,4 @@ void aiMove(Piece* p);
 char getInput();
 
 extern Piece player;
+extern Piece enemy;
