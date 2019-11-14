@@ -31,15 +31,17 @@ void Piece::setLocation(int x, int y, char o, string n){
 
 void Piece::horMove(int dist){
   //location[xCoor][yCoor].pop();
-  if (xCoor + dist < 1 || xCoor + dist >= WIDTH-1){
+  /*if (xCoor + dist < 1 || xCoor + dist >= WIDTH-1){
     moveTo(xCoor, yCoor, rep);
     return;
-  }
+  }*/
   int newCoor = xCoor+dist;
   if (lookSym(newCoor, yCoor) != '-'){
+    status = name+"'s movement was blocked";
     moveTo(xCoor, yCoor, rep);
     return;
   }else{
+    status = "";
     xCoor = newCoor;
     moveTo(xCoor, yCoor, rep);
   }
@@ -47,15 +49,17 @@ void Piece::horMove(int dist){
 
 void Piece::verMove(int dist){
   //location[xCoor][yCoor].pop();
-  if (yCoor + dist < 2 || yCoor + dist >= HEIGHT-1){
+  /*if (yCoor + dist < 2 || yCoor + dist >= HEIGHT-1){
     moveTo(xCoor, yCoor, rep);
     return;
-  }
+  }*/
   int newCoor = yCoor+dist;
   if (lookSym(xCoor, newCoor) != '-'){
+    status = name+"'s movement was blocked";
     moveTo(xCoor, yCoor, rep);
     return;
   }else{
+    status = "";
     yCoor = newCoor;
     moveTo(xCoor, yCoor, rep);
   }

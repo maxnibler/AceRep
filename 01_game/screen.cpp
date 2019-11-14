@@ -47,7 +47,7 @@ char lookSym(int x, int y){
 
 void setScreen(){
   move(0,0);
-  for (int i = 0; i < HEIGHT; i++){
+  for (int i = 1; i < HEIGHT; i++){
     for (int j = 0; j < WIDTH; j++){
       move(i,j);
       addch(getSymbol(j,i));
@@ -55,7 +55,7 @@ void setScreen(){
   }
   refresh();
 }
-/*
+
 void clearMessage(){
   mvprintw(0,1, "");
   for (int i = 0; i < WIDTH-2; i++){
@@ -63,17 +63,16 @@ void clearMessage(){
   }
 }
 
-
 void printMessage(string mess){
   clearMessage();
   mvprintw(0,1, "%s", mess.c_str());
 }
-*/
+
 void refreshScreen(){
   playerMove(&player);
   setScreen();
   aiMove(&enemy);
-  //printMessage(player.getStatus());
+  printMessage(player.getStatus());
   //refresh();
 }
 
