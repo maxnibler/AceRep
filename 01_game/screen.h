@@ -6,6 +6,8 @@
 extern charStack location[WIDTH][HEIGHT];
 //extern charStack test[5][5];
 
+void from_to(int xInit, int yInit, int xDest, int yDest);
+
 void moveTo(int x, int y, char rep);
 
 void initLocation();

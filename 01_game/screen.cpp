@@ -14,6 +14,11 @@ charStack location[WIDTH][HEIGHT];
 Piece player;
 Piece enemy;
 
+void from_to(int xInit, int yInit, int xDest, int yDest){
+  char temp = getSymbol(xInit, yInit);
+  moveTo(xDest, yDest, temp);
+}
+
 void moveTo(int x, int y, char rep){
   location[x][y].push(rep);
 }
@@ -21,6 +26,8 @@ void moveTo(int x, int y, char rep){
 void initPieces(){
   player.setLocation(30, 10, 'O', "Player");
   enemy.setLocation(10, 10, 'X', "Enemy");
+  moveTo(30, 10, 'O');
+  moveTo(10,10,'X');
 }
 
 void initLocation(){
@@ -50,7 +57,7 @@ void setScreen(){
   for (int i = 1; i < HEIGHT; i++){
     for (int j = 0; j < WIDTH; j++){
       move(i,j);
-      addch(getSymbol(j,i));
+      addch(lookSym(j,i));
     }
   }
   refresh();
@@ -70,8 +77,8 @@ void printMessage(string mess){
 
 void refreshScreen(){
   playerMove(&player);
-  setScreen();
   aiMove(&enemy);
+  setScreen();
   printMessage(player.getStatus());
   //refresh();
 }

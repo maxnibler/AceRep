@@ -6,6 +6,7 @@ class Piece{
  private:
   int xCoor;
   int yCoor;
+  int speed;
   char rep;
   std::string status;
   std::string name;
@@ -16,6 +17,10 @@ class Piece{
   std::string getStatus();
   char getChar();
   void inpMove(char dir);
+  void moveUp(int dis);
+  void moveDown(int dist);
+  void moveLeft(int dist);
+  void moveRight(int dist);
   void enemyMove();
   int pieceUp(int y);
   int pieceLeft(int x);
