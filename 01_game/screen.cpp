@@ -10,7 +10,7 @@
 using namespace std;
 
 charStack location[WIDTH][HEIGHT];
-//charStack test[5];
+
 Piece player;
 Piece enemy;
 
@@ -76,11 +76,10 @@ void printMessage(string mess){
 }
 
 void refreshScreen(){
-  playerMove(&player);
   aiMove(&enemy);
+  playerMove(&player);
   setScreen();
   printMessage(player.getStatus());
-  //refresh();
 }
 
 

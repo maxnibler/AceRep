@@ -17,10 +17,10 @@ class Piece{
   std::string getStatus();
   char getChar();
   void inpMove(char dir);
-  void moveUp(int dis);
-  void moveDown(int dist);
-  void moveLeft(int dist);
-  void moveRight(int dist);
+  void moveUp();
+  void moveDown();
+  void moveLeft();
+  void moveRight();
   void enemyMove();
   int pieceUp(int y);
   int pieceLeft(int x);

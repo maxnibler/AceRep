@@ -27,22 +27,23 @@ void Piece::setLocation(int x, int y, char o, string n){
   yCoor = y;
   rep = o;
   name = n;
+  speed = 1;
 }
 
-void Piece::moveUp(int dis){
-  verMove(-dis);
+void Piece::moveUp(){
+  verMove(-speed);
 }
 
-void Piece::moveDown(int dist){
-  verMove(dist);
+void Piece::moveDown(){
+  verMove(speed);
 }
 
-void Piece::moveLeft(int dist){
-  horMove(-dist);
+void Piece::moveLeft(){
+  horMove(-speed);
 }
 
-void Piece::moveRight(int dist){
-  horMove(dist);
+void Piece::moveRight(){
+  horMove(speed);
 }
 
 void Piece::horMove(int dist){
@@ -76,26 +77,23 @@ char Piece::getChar(){
 }
 
 void Piece::inpMove(char dir){
-  if (dir == 'w') moveUp(1);
-  if (dir == 'a') moveLeft(1);
-  if (dir == 's') moveDown(1);
-  if (dir == 'd') moveRight(1);
-  // printMessage("Player coordinates "
-  //       +to_string(xCoor)+" "+to_string(yCoor));
+  if (dir == 'w') moveUp();
+  if (dir == 'a') moveLeft();
+  if (dir == 's') moveDown();
+  if (dir == 'd') moveRight();
 }
 
 void Piece::enemyMove(){
   int upDiff = player.pieceUp(yCoor),
     leftDiff = player.pieceLeft(xCoor);
-  //if (abs(upDiff)+abs(leftDiff) <= 1) moveTo(xCoor,yCoor,rep);
   if (abs(upDiff) > abs(leftDiff) && upDiff < 0) {
-    moveUp(1);
+    moveUp();
   }else if (abs(upDiff) > abs(leftDiff) && upDiff > 0){
-    moveDown(1);
+    moveDown();
   }else if (abs(upDiff) < abs(leftDiff) && leftDiff > 0){
-    moveRight(1);
+    moveRight();
   }else if (abs(upDiff) < abs(leftDiff) && leftDiff < 0){
-    moveLeft(1);
+    moveLeft();
   }
 }
 
