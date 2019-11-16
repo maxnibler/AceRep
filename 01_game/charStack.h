@@ -2,7 +2,7 @@ class charStack{
  private:
   int top;
   char base;
-  char data[10];
+  char data[3];
  public:
   char peek();
   char pop();

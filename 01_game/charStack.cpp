@@ -9,7 +9,7 @@ using namespace std;
 
 void charStack::push(char c){
   data[++top] = c;
-  top = top % 10;
+  top = top % 3;
 }
 
 char charStack::peek(){

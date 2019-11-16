@@ -42,7 +42,27 @@ void initLocation(){
       }
     }
   }
+  makeWall(true,0,0,HEIGHT);
+  makeWall(true,WIDTH-1,0,HEIGHT);
+  makeWall(false,0,HEIGHT-1,WIDTH);
+  makeWall(false,0,2,WIDTH);
 }
+
+int makeWall(bool vert, int x, int y, int len){
+  if (x < 0 || y < 0) return -1;
+  if (vert){
+    if (y+len > HEIGHT) return -1;
+    for (int i = 0; i < len; i++){
+      location[x][y+i].setBase('|');
+    }
+  }else{
+    if (x+len > WIDTH) return -1;
+    for (int i = 0; i < len; i++){
+      location[x+i][y].setBase('-');
+    }
+  }
+  return 0;
+}    
 
 char getSymbol(int x, int y){
   return location[x][y].pop();

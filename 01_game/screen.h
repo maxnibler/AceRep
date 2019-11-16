@@ -16,6 +16,8 @@ char getSymbol(int x, int y);
 
 char lookSym(int x, int y);
 
+int makeWall(bool vert, int x, int y, int len);
+
 void clearMessage(int row);
 
 void initPieces();
