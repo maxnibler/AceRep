@@ -31,7 +31,6 @@ int Piece::absDist(Piece* p){
   return ret;
 }
   
-
 void Piece::setLocation(int x, int y, char o, string n){
   xCoor = x;
   yCoor = y;
@@ -172,17 +171,17 @@ void Piece::inpMove(char dir){
 
 void Piece::attackDir(){
   char dir = getDir(), sym;
-  switch(dir){
-  case '1' : sym = lookSym(xCoor-1, yCoor+1);
-  case '2' : sym = lookSym(xCoor, yCoor+1);
-  case '3' : sym = lookSym(xCoor+1, yCoor+1);
-  case '4' : sym = lookSym(xCoor-1, yCoor);
-  case '6' : sym = lookSym(xCoor+1, yCoor);
-  case '7' : sym = lookSym(xCoor-1, yCoor-1);
-  case '8' : sym = lookSym(xCoor, yCoor-1);
-  case '9' : sym =lookSym(xCoor+1, yCoor-1);
-  }
-  if (sym == '.') status = name+" swung and missed";
+  int aX, aY;
+  if (dir == '1'){aX = xCoor-1; aY =  yCoor+1;}
+  if (dir == '2'){aX = xCoor; aY = yCoor+1;}
+  if (dir == '3'){aX = xCoor+1; aY =  yCoor+1;}
+  if (dir == '4'){aX = xCoor-1; aY =  yCoor;}
+  if (dir == '6'){aX = xCoor+1; aY =  yCoor;}
+  if (dir == '7'){aX = xCoor-1; aY =  yCoor-1;}
+  if (dir == '8'){aX = xCoor; aY =  yCoor-1;}
+  if (dir == '9'){aX = xCoor+1; aY = yCoor-1;}
+  sym = lookSym(aX, aY);
+  if (sym == '.') status = name+" swings and misses!";
   if (sym == 'G') attack(&enemy);
 }
   
@@ -215,8 +214,6 @@ void Piece::enemyMove(){
 
 char getInput(){
   char c = getch();
-  clearMessage(0);
-  mvaddch(0,0, c);
   switch(c){
     case '8' : return c;
     case '4' : return c;
@@ -253,10 +250,12 @@ char getDir(){
 
 void playerMove(Piece* p){
   char dir = getInput();
+  if (dir == '+'){
+    p->attackDir();
+  }else
   p->inpMove(dir);
 }
 
 void aiMove(Piece* p){
   p->enemyMove();
 }
-

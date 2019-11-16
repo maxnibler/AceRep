@@ -72,7 +72,7 @@ void clearMessage(int row){
 
 void printMessage(int row, string mess){
   clearMessage(row);
-  mvprintw(row, 0, "%s", mess.c_str());
+  mvprintw(row, 1, "%s", mess.c_str());
 }
 
 void refreshScreen(){
@@ -82,6 +82,3 @@ void refreshScreen(){
   printMessage(1, player.getStatus());
   setScreen();
 }
-
-
-

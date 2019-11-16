@@ -4,14 +4,15 @@ CPP     = ${GENDEPS:=.cpp} main.cpp
 OBJ     = ${GENDEPS:=.o} main.o
 HEAD    = ${GENDEPS:=.h}
 GPP     = clang++ -std=gnu++17
-FLAG    = -lncurses -Wall -Wextra -Wpedantic -Wold-style-cast
+FLAG    = -Wall -Wextra -Wpedantic -Wold-style-cast
+LINK    = -lncurses -Wall -Wextra -Wpedantic -Wold-style-cast
 EXEC    = game
 MESS    = "generic commit"
 GIT     = git commit -am
 BIN     = ~/.Scripts/
 
 all : ${EXDEPS}
-	${GPP} ${FLAG} -o ${EXEC} ${OBJ}
+	${GPP} ${LINK} -o ${EXEC} ${OBJ}
 
 %.o : %.cpp
 	${GPP} ${FLAG} -o $@ -c $<
