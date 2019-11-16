@@ -24,21 +24,21 @@ void moveTo(int x, int y, char rep){
 }
 
 void initPieces(){
-  player.setLocation(30, 10, 'O', "Player");
-  enemy.setLocation(10, 10, 'X', "Enemy");
-  moveTo(30, 10, 'O');
-  moveTo(10,10,'X');
+  player.setLocation(30, 10, '@', "Player");
+  enemy.setLocation(10, 10, 'G', "Goblin");
+  moveTo(30, 10, '@');
+  moveTo(10,10,'G');
 }
 
 void initLocation(){
   for (int i = 0; i < WIDTH; i++){
     for (int j = 0; j < HEIGHT; j++){
       if (i == 0 || i == WIDTH - 1){
-	location[i][j].setBase('#');
+	location[i][j].setBase(' ');
       }else if (j == 1 || j == HEIGHT - 1){
-	location[i][j].setBase('#');
+	location[i][j].setBase(' ');
       }else{
-	location[i][j].setBase('-');
+	location[i][j].setBase('.');
       }
     }
   }
@@ -54,7 +54,7 @@ char lookSym(int x, int y){
 
 void setScreen(){
   move(0,0);
-  for (int i = 1; i < HEIGHT; i++){
+  for (int i = 2; i < HEIGHT; i++){
     for (int j = 0; j < WIDTH; j++){
       move(i,j);
       addch(lookSym(j,i));
@@ -63,23 +63,24 @@ void setScreen(){
   refresh();
 }
 
-void clearMessage(){
-  mvprintw(0,1, "");
+void clearMessage(int row){
+  mvprintw(row,0, "");
   for (int i = 0; i < WIDTH-2; i++){
     printw(" ");
   }
 }
 
-void printMessage(string mess){
-  clearMessage();
-  mvprintw(0,1, "%s", mess.c_str());
+void printMessage(int row, string mess){
+  clearMessage(row);
+  mvprintw(row, 0, "%s", mess.c_str());
 }
 
 void refreshScreen(){
   aiMove(&enemy);
   playerMove(&player);
+  printMessage(0, enemy.getStatus());
+  printMessage(1, player.getStatus());
   setScreen();
-  printMessage(player.getStatus());
 }
 
 

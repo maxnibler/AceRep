@@ -16,6 +16,8 @@ char getSymbol(int x, int y);
 
 char lookSym(int x, int y);
 
+void clearMessage(int row);
+
 void initPieces();
 
 void setScreen();
