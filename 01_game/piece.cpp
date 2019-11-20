@@ -183,10 +183,20 @@ void Piece::attackDir(){
   if (sym == 'G') attack(&enemy);
 }
   
+int Piece::getX(){
+  return xCoor;
+}
+
+int Piece::getY(){
+  return yCoor;
+}
 
 void Piece::enemyMove(){
   int upDiff = player.pieceUp(yCoor),
     leftDiff = player.pieceLeft(xCoor);
+  //status = "Path "+
+  findPath(xCoor,yCoor,player.getX(),player.getY());
+  printpath();
   if (absDist(&player) == 1){
     attack(&player);
   }else if (abs(upDiff) > abs(leftDiff) && upDiff < 0) {
@@ -209,3 +219,28 @@ void Piece::enemyMove(){
     }
   }
 }
+/*
+void Piece::enemyMove(){
+  int abs = absDist(&player);
+  if (abs == 1) attack(&player);
+  else if (abs > 30) wait();
+  else{
+    int dir =
+      findPath(xCoor,yCoor,player.getX(),player.getY());
+    //printpath();
+    if (dir == 1) moveLD();
+    else if (dir == 2) moveDown();
+    else if (dir == 3) moveRD();
+    else if (dir == 4) moveLeft();
+    else if (dir == 6) moveRight();
+    else if (dir == 7) moveLU();
+    else if (dir == 8) moveUp();
+    else if (dir == 9) moveRU();
+  }
+}
+*/
+
+
+
+
+    

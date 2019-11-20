@@ -12,7 +12,7 @@
 #include "roll.h"
 
 using namespace std;
-#define PSIZE 20
+#define PSIZE 41
 
 int testArray[10][10];
 int path[PSIZE];
@@ -57,13 +57,6 @@ int dirOrder(int dir, int ind){
 
 void printpath(){
   int i;
-  for (i = 0; i < 10; i++){
-    cout << "[ ";
-    for (int j = 0; j < 10; j++){
-      cout << testArray[j][i] << ' ';
-    }
-    cout << "]\n";
-  }
   i = 0;
   cout << "Path: ";
   while (i < PSIZE){
@@ -92,19 +85,8 @@ int getDirection(int fromX, int fromY, int toX, int toY){
   return -1;
 }
 
-
-void findPath(int fromX, int fromY, int toX, int toY){
-  bool Visited[10][10];
-  for (int i = 0; i < 10; i++){
-    for (int j = 0; j < 10; j++){
-      Visited[i][j] = false;
-    }
-  }
-  loadPath(fromX,fromY,toX,toY,0,Visited);
-}
-
-int loadPath
-(int fromX, int fromY, int toX, int toY, int depth, bool V[10][10]){
+int loadPath(int fromX, int fromY, int toX,
+	     int toY,int depth, bool V[WIDTH][HEIGHT]){
   int dir = getDirection(fromX, fromY, toX, toY);
   //cout << "Destination in dir: " << dir << endl;
   if (dir == 0){
@@ -112,10 +94,10 @@ int loadPath
   }
   if (V[fromX][fromY]) return -1;
   V[fromX][fromY] = true;
-  if (fromX == -1 || fromY == -1 || fromX == 10 || fromY == 10)
+  if (fromX == -1 || fromY == -1 || fromX == WIDTH || fromY == HEIGHT)
     return -1;
-  if (depth == 19) return -1;
-  if (testArray[fromX][fromY] == 2) {
+  if (depth == 30) return -1;
+  if (lookSym(fromX,fromY) != '.' && lookSym(fromX,fromY) != 'G') {
     //printf("Coordinates: %d, %d blocked.\n", fromX, fromY);
     return -1;
   }
@@ -123,15 +105,13 @@ int loadPath
   for (int i = 1; i < 9; i++){
     trydir = dirOrder(dir, i);
     path[depth] = trydir;
-    //if (oppositeDir(trydir) == path[depth-1]){
-    //}else{
     switch(trydir){
     case 1 :
       found = loadPath(fromX-1,fromY+1,toX,toY,depth+1,V);
       break;
     case 2 :
       found = loadPath(fromX,fromY+1,toX,toY,depth+1,V);
-      break;
+      break; 
     case 3 :
       found = loadPath(fromX+1,fromY+1,toX,toY,depth+1,V);
       break;
@@ -155,12 +135,29 @@ int loadPath
     //cout << "Trying direction: " << trydir <<
     //  " at depth: " << depth << " found: " << found << endl;
     if (found == 0) {
+      //if (depth == 0) return trydir;
       return 0;
     }
   }
   return -1;
 }
   
+
+int findPath(int fromX, int fromY, int toX, int toY){
+  //  for (int i = 0; i < 70; i++){
+  //  path[i] = 0;
+  //}
+  bool Visited[WIDTH][HEIGHT];
+  for (int i = 0; i < WIDTH; i++){
+    for (int j = 0; j < HEIGHT; j++){
+      Visited[i][j] = false;
+    }
+  }
+  int step = loadPath(fromX,fromY,toX,toY,0,Visited);
+  if (step != -1)
+    return step;
+  else return 0;
+}
   
 //bool lineOfSight(int fromX, int fromY, int toX, int toY){
   

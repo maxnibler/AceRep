@@ -29,6 +29,8 @@ class Piece{
   void attackDir();
   int absDist(Piece* p);
   void enemyMove();
+  int getX();
+  int getY();
   int pieceUp(int y);
   int pieceLeft(int x);
   void wait();
@@ -45,15 +47,8 @@ char getInp();
 char getDir();
 
 int dirOrder(int dir, int ind);
-
-void loadArray();
-
 void printpath();
-
-int loadPath(int fromX, int fromY, int toX,
-	     int toY, int depth, bool V[10][10]);
-
-void findPath(int fromX, int fromY, int toX, int toY);
+int findPath(int fromX, int fromY, int toX, int toY);
 
 extern Piece player;
 extern Piece enemy;

@@ -16,23 +16,18 @@ bool active;
 using namespace std;
 
 int main (/*int argc, char* argv[]*/){
-  int x1 = 9, x2 = 8, y1 = 9, y2 = 0;
-  loadArray();
-  printf("Finding path from %d, %d to %d, %d\n",
-	 x1, y1, x2, y2);
-  findPath(x1,y1,x2,y2);
-  printpath();
-  /*initscr();
+  initscr();
   raw();
   keypad(stdscr, TRUE);
   noecho();
   initLocation();
   initPieces();
+  //cout << findPath
   setScreen();
   active = true;
   while(active){
     refreshScreen();
   }
-  endwin();*/
+  endwin(); 
   return 0;
 }
