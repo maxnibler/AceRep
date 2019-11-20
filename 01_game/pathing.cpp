@@ -61,7 +61,7 @@ int loadPath(int fromX, int fromY, int toX, int toY,
   if (fromX == -1 || fromY == -1 || fromX == WIDTH || fromY == HEIGHT)
     return -1;
   //Search too deep
-  if (depth == 30) return -1;
+  if (depth == PSIZE) return -1;
   //Path blocked
   if (lookSym(fromX,fromY) != '.' && lookSym(fromX,fromY) != 'G') {
     return -1;
