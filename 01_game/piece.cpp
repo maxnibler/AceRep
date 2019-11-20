@@ -190,13 +190,13 @@ int Piece::getX(){
 int Piece::getY(){
   return yCoor;
 }
-
+/*
 void Piece::enemyMove(){
   int upDiff = player.pieceUp(yCoor),
     leftDiff = player.pieceLeft(xCoor);
   //status = "Path "+
   findPath(xCoor,yCoor,player.getX(),player.getY());
-  printpath();
+  //printpath();
   if (absDist(&player) == 1){
     attack(&player);
   }else if (abs(upDiff) > abs(leftDiff) && upDiff < 0) {
@@ -219,14 +219,25 @@ void Piece::enemyMove(){
     }
   }
 }
-/*
+*/
+void Piece::moveTowards(int x, int y){
+  toX = x;
+  toY = y;
+}
+
 void Piece::enemyMove(){
   int abs = absDist(&player);
   if (abs == 1) attack(&player);
   else if (abs > 30) wait();
   else{
+    if (lineSight(xCoor,yCoor,player.getX(),player.getY())){
+      moveTowards(player.getX(),player.getY());
+    }//else cout << toX << " " << toY << ";";
+    //toX = player.getX();
+    //toY = player.getY();
+    
     int dir =
-      findPath(xCoor,yCoor,player.getX(),player.getY());
+      findPath(xCoor,yCoor,toX,toY);
     //printpath();
     if (dir == 1) moveLD();
     else if (dir == 2) moveDown();
@@ -238,7 +249,7 @@ void Piece::enemyMove(){
     else if (dir == 9) moveRU();
   }
 }
-*/
+
 
 
 

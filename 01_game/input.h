@@ -7,6 +7,8 @@ class Piece{
   int xCoor;
   int yCoor;
   int speed;
+  int toX;
+  int toY;
   int dmg;
   char rep;
   std::string status;
@@ -34,7 +36,10 @@ class Piece{
   int pieceUp(int y);
   int pieceLeft(int x);
   void wait();
+  void moveTowards(int x, int y);
 };
+
+bool lineSight(int fX, int fY, int tX, int tY);
 
 void playerMove(Piece* p);
 

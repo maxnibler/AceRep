@@ -26,6 +26,7 @@ void moveTo(int x, int y, char rep){
 void initPieces(){
   player.setLocation(30, 10, '@', "Player");
   enemy.setLocation(10, 10, 'G', "Goblin");
+  enemy.moveTowards(30,10);
   moveTo(30, 10, '@');
   moveTo(10,10,'G');
 }

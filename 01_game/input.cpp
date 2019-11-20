@@ -58,5 +58,6 @@ void playerMove(Piece* p){
 }
 
 void aiMove(Piece* p){
+  //p->moveTowards(player.getX(), player.getY());
   p->enemyMove();
 }
