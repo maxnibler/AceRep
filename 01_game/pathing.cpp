@@ -14,35 +14,8 @@
 using namespace std;
 #define PSIZE 41
 
-//int testArray[10][10];
-//int path[PSIZE];
 int order[] = {1, 2, 3, 6, 9, 8, 7, 4};
 
-/*
-void loadArray(){
-  int load;
-  for (int i = 0; i < 10; i++){
-    for (int j = 0; j < 10; j++){
-      if (roll(6) == 1){
-	load = 2;
-      }else{
-	load = 1;
-      }
-      testArray[i][j] = load;
-    }
-  }
-}
-
-int oppositeDir(int dir){
-  int start, i, opp;
-  for (i = 0; i < 8; i++){
-    if (order[i] == dir) start = i;
-  }
-  opp = order[(start+4) % 8];
-  //cout << "Opp of " << dir << "is " << opp << endl;
-  return opp;
-}
-*/
 int dirOrder(int dir, int ind){
   int start, i, neg = 1;
   for (i = 0; i < 8; i++){
@@ -54,21 +27,10 @@ int dirOrder(int dir, int ind){
   i = i % 8;
   return order[i];
 }
-/*
-void printpath(){
-  int i;
-  i = 0;
-  cout << "Path: ";
-  while (i < PSIZE){
-    cout << path[i++] << " ";
-  }
-  cout << endl;
-}
-*/
+
 int getDirection(int fromX, int fromY, int toX, int toY){
   int up = 8, upL = 7, upR = 9, r = 6, l = 4, downL = 1,
     down = 2, downR = 3, x = toX-fromX, y = toY-fromY;
-  //printf("X diff: %d, Y diff: %d\n", x, y);
   if (x == 0){
     if (y == 0) return 0;
     if (y < 0)  return up;
@@ -88,17 +50,20 @@ int getDirection(int fromX, int fromY, int toX, int toY){
 int loadPath(int fromX, int fromY, int toX, int toY,
 	     int path[PSIZE],int depth, bool V[WIDTH][HEIGHT]){
   int dir = getDirection(fromX, fromY, toX, toY);
-  //cout << "Destination in dir: " << dir << endl;
+  //Path found
   if (dir == 0){
     return 0;
   }
+  //Redundant movement check
   if (V[fromX][fromY]) return -1;
   V[fromX][fromY] = true;
+  //Move out of bounds check
   if (fromX == -1 || fromY == -1 || fromX == WIDTH || fromY == HEIGHT)
     return -1;
+  //Search too deep
   if (depth == 30) return -1;
+  //Path blocked
   if (lookSym(fromX,fromY) != '.' && lookSym(fromX,fromY) != 'G') {
-    //printf("Coordinates: %d, %d blocked.\n", fromX, fromY);
     return -1;
   }
   int trydir, found;
@@ -130,12 +95,8 @@ int loadPath(int fromX, int fromY, int toX, int toY,
     case 9 :
       found = loadPath(fromX+1,fromY-1,toX,toY,path,depth+1,V);
       break;
-      //}
     }
-    //cout << "Trying direction: " << trydir <<
-    //  " at depth: " << depth << " found: " << found << endl;
     if (found == 0) {
-      //if (depth == 0) return trydir;
       return 0;
     }
   }
@@ -144,9 +105,6 @@ int loadPath(int fromX, int fromY, int toX, int toY,
   
 
 int findPath(int fromX, int fromY, int toX, int toY){
-  //  for (int i = 0; i < 70; i++){
-  //  path[i] = 0;
-  //}
   int path[PSIZE];
   bool Visited[WIDTH][HEIGHT];
   for (int i = 0; i < WIDTH; i++){
