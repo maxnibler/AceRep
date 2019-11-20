@@ -42,7 +42,9 @@ void Piece::attack(Piece* p){
   status = name+" attacks "+p->getName()+" for "
     +to_string(dmg)+" damage.";
 }
-
+/*----------------------
+|    Value Returns     |
+----------------------*/
 string Piece::getName(){
   return name;
 }
@@ -55,6 +57,17 @@ char Piece::getChar(){
   return rep;
 }
 
+int Piece::getX(){
+  return xCoor;
+}
+
+int Piece::getY(){
+  return yCoor;
+}
+
+/*-----------------------
+|  Positional Commands  |
+-----------------------*/
 void Piece::wait(){
   from_to(xCoor, yCoor, xCoor, yCoor);
 }
@@ -64,7 +77,6 @@ void Piece::moveUp(){
   if (lookSym(xCoor, newCoor) != '.'){
     status = name+"'s movement was blocked";
   }else{
-    //status = "";
     from_to(xCoor, yCoor, xCoor, newCoor);
     yCoor = newCoor;
   }
@@ -75,7 +87,6 @@ void Piece::moveDown(){
   if (lookSym(xCoor, newCoor) != '.'){
     status = name+"'s movement was blocked";
   }else{
-    status = "";
     from_to(xCoor, yCoor, xCoor, newCoor);
     yCoor = newCoor;
   }
@@ -86,7 +97,6 @@ void Piece::moveLeft(){
   if (lookSym(newX, yCoor) != '.'){
     status = name+"'s movement was blocked";
   }else{
-    //status = "";
     from_to(xCoor, yCoor, newX, yCoor);
     xCoor = newX;
   }
@@ -97,7 +107,6 @@ void Piece::moveRight(){
   if (lookSym(newX, yCoor) != '.'){
     status = name+"'s movement was blocked";
   }else{
-    //status = "";
     from_to(xCoor, yCoor, newX, yCoor);
     xCoor = newX;
   }
@@ -109,7 +118,6 @@ void Piece::moveRU(){
   if (lookSym(newX, newY) != '.'){
     status = name+"'s movement was blocked";
   }else{
-    //status = "";
     from_to(xCoor, yCoor, newX, newY);
     xCoor = newX;
     yCoor = newY;
@@ -122,7 +130,6 @@ void Piece::moveLU(){
   if (lookSym(newX, newY) != '.'){
     status = name+"'s movement was blocked";
   }else{
-    //status = "";
     from_to(xCoor, yCoor, newX, newY);
     xCoor = newX;
     yCoor = newY;
@@ -135,7 +142,6 @@ void Piece::moveLD(){
   if (lookSym(newX, newY) != '.'){
     status = name+"'s movement was blocked";
   }else{
-    //status = "";
     from_to(xCoor, yCoor, newX, newY);
     xCoor = newX;
     yCoor = newY;
@@ -148,7 +154,6 @@ void Piece::moveRD(){
   if (lookSym(newX, newY) != '.'){
     status = name+"'s movement was blocked";
   }else{
-    status = "";
     from_to(xCoor, yCoor, newX, newY);
     xCoor = newX;
     yCoor = newY;
@@ -167,59 +172,6 @@ void Piece::inpMove(char dir){
   if (dir == '5') wait();    
 }
 
-void Piece::attackDir(){
-  char dir = getDir(), sym;
-  int aX, aY;
-  if (dir == '1'){aX = xCoor-1; aY =  yCoor+1;}
-  if (dir == '2'){aX = xCoor; aY = yCoor+1;}
-  if (dir == '3'){aX = xCoor+1; aY =  yCoor+1;}
-  if (dir == '4'){aX = xCoor-1; aY =  yCoor;}
-  if (dir == '6'){aX = xCoor+1; aY =  yCoor;}
-  if (dir == '7'){aX = xCoor-1; aY =  yCoor-1;}
-  if (dir == '8'){aX = xCoor; aY =  yCoor-1;}
-  if (dir == '9'){aX = xCoor+1; aY = yCoor-1;}
-  sym = lookSym(aX, aY);
-  if (sym == '.') status = name+" swings and misses!";
-  if (sym == 'G') attack(&enemy);
-}
-  
-int Piece::getX(){
-  return xCoor;
-}
-
-int Piece::getY(){
-  return yCoor;
-}
-/*
-void Piece::enemyMove(){
-  int upDiff = player.pieceUp(yCoor),
-    leftDiff = player.pieceLeft(xCoor);
-  //status = "Path "+
-  findPath(xCoor,yCoor,player.getX(),player.getY());
-  //printpath();
-  if (absDist(&player) == 1){
-    attack(&player);
-  }else if (abs(upDiff) > abs(leftDiff) && upDiff < 0) {
-    moveUp();
-  }else if (abs(upDiff) > abs(leftDiff)){
-    moveDown();
-  }else if (abs(upDiff) < abs(leftDiff) && leftDiff > 0){
-    moveRight();
-  }else if (abs(upDiff) < abs(leftDiff)){
-    moveLeft();
-  }else if (abs(upDiff) == abs(leftDiff)){
-    if (leftDiff < 0 && upDiff < 0){
-      moveLU();
-    }else if (leftDiff < 0 && upDiff > 0){
-      moveLD();
-    }else if (leftDiff > 0 && upDiff < 0){
-      moveRU();
-    }else if (leftDiff > 0 && upDiff > 0){
-      moveRD();
-    }
-  }
-}
-*/
 void Piece::moveTowards(int x, int y){
   toX = x;
   toY = y;
@@ -233,14 +185,8 @@ void Piece::enemyMove(){
     if (lineSight(xCoor,yCoor,player.getX(),player.getY())){
       moveTowards(player.getX(),player.getY());
       status = "The goblin sees you";
-	}else status = "";
-      //cout << toX << " " << toY << ";";
-    //toX = player.getX();
-    //toY = player.getY();
-    
-    int dir =
-      findPath(xCoor,yCoor,toX,toY);
-    //printpath();
+    }else status = "";
+    int dir = findPath(xCoor,yCoor,toX,toY);
     if (dir == 1) moveLD();
     else if (dir == 2) moveDown();
     else if (dir == 3) moveRD();

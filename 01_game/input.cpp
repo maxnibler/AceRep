@@ -49,6 +49,22 @@ char getDir(){
   return getInput();
 }
 
+void Piece::attackDir(){
+  char dir = getDir(), sym;
+  int aX, aY;
+  if (dir == '1'){ aX = xCoor-1; aY = yCoor+1; }
+  if (dir == '2'){ aX = xCoor;   aY = yCoor+1; }
+  if (dir == '3'){ aX = xCoor+1; aY = yCoor+1; }
+  if (dir == '4'){ aX = xCoor-1; aY = yCoor;   }
+  if (dir == '6'){ aX = xCoor+1; aY = yCoor;   }
+  if (dir == '7'){ aX = xCoor-1; aY = yCoor-1; }
+  if (dir == '8'){ aX = xCoor;   aY = yCoor-1; }
+  if (dir == '9'){ aX = xCoor+1; aY = yCoor-1; }
+  sym = lookSym(aX, aY);
+  if (sym == '.') status = name+" swings and misses!";
+  if (sym == 'G') attack(&enemy);
+}
+
 void playerMove(Piece* p){
   char dir = getInput();
   if (dir == '+'){
