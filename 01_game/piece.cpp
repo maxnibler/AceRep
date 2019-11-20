@@ -64,7 +64,7 @@ void Piece::moveUp(){
   if (lookSym(xCoor, newCoor) != '.'){
     status = name+"'s movement was blocked";
   }else{
-    status = "";
+    //status = "";
     from_to(xCoor, yCoor, xCoor, newCoor);
     yCoor = newCoor;
   }
@@ -86,7 +86,7 @@ void Piece::moveLeft(){
   if (lookSym(newX, yCoor) != '.'){
     status = name+"'s movement was blocked";
   }else{
-    status = "";
+    //status = "";
     from_to(xCoor, yCoor, newX, yCoor);
     xCoor = newX;
   }
@@ -97,7 +97,7 @@ void Piece::moveRight(){
   if (lookSym(newX, yCoor) != '.'){
     status = name+"'s movement was blocked";
   }else{
-    status = "";
+    //status = "";
     from_to(xCoor, yCoor, newX, yCoor);
     xCoor = newX;
   }
@@ -109,7 +109,7 @@ void Piece::moveRU(){
   if (lookSym(newX, newY) != '.'){
     status = name+"'s movement was blocked";
   }else{
-    status = "";
+    //status = "";
     from_to(xCoor, yCoor, newX, newY);
     xCoor = newX;
     yCoor = newY;
@@ -122,7 +122,7 @@ void Piece::moveLU(){
   if (lookSym(newX, newY) != '.'){
     status = name+"'s movement was blocked";
   }else{
-    status = "";
+    //status = "";
     from_to(xCoor, yCoor, newX, newY);
     xCoor = newX;
     yCoor = newY;
@@ -135,7 +135,7 @@ void Piece::moveLD(){
   if (lookSym(newX, newY) != '.'){
     status = name+"'s movement was blocked";
   }else{
-    status = "";
+    //status = "";
     from_to(xCoor, yCoor, newX, newY);
     xCoor = newX;
     yCoor = newY;
@@ -232,7 +232,9 @@ void Piece::enemyMove(){
   else{
     if (lineSight(xCoor,yCoor,player.getX(),player.getY())){
       moveTowards(player.getX(),player.getY());
-    }//else cout << toX << " " << toY << ";";
+      status = "The goblin sees you";
+	}else status = "";
+      //cout << toX << " " << toY << ";";
     //toX = player.getX();
     //toY = player.getY();
     
