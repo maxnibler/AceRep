@@ -42,15 +42,15 @@ class Piece{
   void         enemyMove();
 };
 
-bool lineSight(int fX, int fY, int tX, int tY);
+//bool lineSight(int fX, int fY, int tX, int tY);
 
 void playerMove(Piece* p);
 
 void aiMove(Piece* p);
 
-int dirOrder(int dir, int ind);
+//int dirOrder(int dir, int ind);
 
-int findPath(int fromX, int fromY, int toX, int toY);
+//int findPath(int fromX, int fromY, int toX, int toY);
 
 extern Piece player;
 extern Piece enemy;

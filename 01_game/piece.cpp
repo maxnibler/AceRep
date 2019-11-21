@@ -13,6 +13,10 @@
 
 using namespace std;
 
+/*------------------------
+|   Value Calculations   |
+------------------------*/
+
 int Piece::pieceUp(int y){
   return yCoor - y;
 }
@@ -28,7 +32,11 @@ int Piece::absDist(Piece* p){
   int ret = sqrt(x+y);
   return ret;
 }
-  
+
+/*------------------
+|    Set Values    |
+------------------*/
+
 void Piece::setLocation(int x, int y, char o, string n){
   xCoor = x;
   yCoor = y;
@@ -38,13 +46,10 @@ void Piece::setLocation(int x, int y, char o, string n){
   dmg = 1;
 }
 
-void Piece::attack(Piece* p){
-  status = name+" attacks "+p->getName()+" for "
-    +to_string(dmg)+" damage.";
-}
 /*----------------------
 |    Value Returns     |
 ----------------------*/
+
 string Piece::getName(){
   return name;
 }
@@ -65,9 +70,10 @@ int Piece::getY(){
   return yCoor;
 }
 
-/*-----------------------
-|  Positional Commands  |
------------------------*/
+/*---------------------------
+|    Positional Commands    |
+---------------------------*/
+
 void Piece::wait(){
   from_to(xCoor, yCoor, xCoor, yCoor);
 }
@@ -172,32 +178,14 @@ void Piece::inpMove(char dir){
   if (dir == '5') wait();    
 }
 
-void Piece::moveTowards(int x, int y){
-  toX = x;
-  toY = y;
-}
+/*-------------------------
+|     Combat Commands     |
+-------------------------*/
 
-void Piece::enemyMove(){
-  int abs = absDist(&player);
-  if (abs == 1) attack(&player);
-  else if (abs > 30) wait();
-  else{
-    if (lineSight(xCoor,yCoor,player.getX(),player.getY())){
-      moveTowards(player.getX(),player.getY());
-      status = "The goblin sees you";
-    }else status = "";
-    int dir = findPath(xCoor,yCoor,toX,toY);
-    if (dir == 1) moveLD();
-    else if (dir == 2) moveDown();
-    else if (dir == 3) moveRD();
-    else if (dir == 4) moveLeft();
-    else if (dir == 6) moveRight();
-    else if (dir == 7) moveLU();
-    else if (dir == 8) moveUp();
-    else if (dir == 9) moveRU();
-  }
+void Piece::attack(Piece* p){
+  status = name+" attacks "+p->getName()+" for "
+    +to_string(dmg)+" damage.";
 }
-
 
 
 
