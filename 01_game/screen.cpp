@@ -6,6 +6,7 @@
 #include <ncurses.h>
 #include "screen.h"
 #include "input.h"
+#include "logging.h"
 
 using namespace std;
 
@@ -15,6 +16,12 @@ Piece player;
 Piece enemy;
 
 void from_to(int xInit, int yInit, int xDest, int yDest){
+  if (logging){
+    string logs;
+    logs = "  <"+to_string(xInit)+", "+to_string(yInit)+"> to <"
+      +to_string(xDest)+", "+to_string(yDest)+">";
+    logString(logs);
+  }
   char temp = getSymbol(xInit, yInit);
   moveTo(xDest, yDest, temp);
 }

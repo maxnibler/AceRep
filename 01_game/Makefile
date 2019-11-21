@@ -1,5 +1,5 @@
 EXDEPS  = ${OBJ}
-GENDEPS = roll input screen charStack piece pathing
+GENDEPS = roll logging input screen charStack piece pathing
 CPP     = ${GENDEPS:=.cpp} main.cpp
 OBJ     = ${GENDEPS:=.o} main.o
 HEAD    = ${GENDEPS:=.h}
@@ -29,7 +29,8 @@ ci :
 deps : ${OBJ}
 
 test :
-	./${EXEC}
+	./${EXEC} -l
+	cat game.log
 
 install : ${EXDEPS}
 	${GPP} ${FLAG} -o ${BIN}${EXEC} ${OBJ}

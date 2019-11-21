@@ -7,6 +7,7 @@
 #include "input.h"
 #include "screen.h"
 #include "roll.h"
+#include "logging.h"
 
 using namespace std;
 #define PSIZE 41
@@ -162,7 +163,14 @@ void Piece::enemyMove(){
     if (lineSight(xCoor,yCoor,player.getX(),player.getY())){
       moveTowards(player.getX(),player.getY());
       //status = "The goblin sees you";
-    }//else status = "";
+    }else if (logging){
+      string logs = name+" Cannot see Player";
+      logString(logs);
+    }
+    if (logging){
+      string logs = name+" moves:";
+      logString(logs);
+    }
     int dir = findPath(xCoor,yCoor,toX,toY);
     if (dir == 1) moveLD();
     else if (dir == 2) moveDown();

@@ -10,6 +10,7 @@
 #include "input.h"
 #include "screen.h"
 #include "roll.h"
+#include "logging.h"
 
 using namespace std;
 
@@ -167,6 +168,10 @@ void Piece::moveRD(){
 }
 
 void Piece::inpMove(char dir){
+  if (logging){
+    string logs = name+" moves:";
+    logString(logs);
+  }
   if (dir == '8') moveUp();
   if (dir == '4') moveLeft();
   if (dir == '2') moveDown();
@@ -183,6 +188,10 @@ void Piece::inpMove(char dir){
 -------------------------*/
 
 void Piece::attack(Piece* p){
+  if (logging){
+    string logs = name+" attacks: "+p->getName();
+    logString(logs);
+  }
   status = name+" attacks "+p->getName()+" for "
     +to_string(dmg)+" damage.";
 }
