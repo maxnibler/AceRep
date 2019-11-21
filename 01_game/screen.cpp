@@ -50,7 +50,7 @@ void initLocation(){
       }
     }
   }
-  makeWall(true,40,5,6);
+  makeWall(true,0,0,HEIGHT);
   makeWall(true,WIDTH-1,0,HEIGHT);
   makeWall(false,0,HEIGHT-1,WIDTH);
   makeWall(false,0,2,WIDTH);
