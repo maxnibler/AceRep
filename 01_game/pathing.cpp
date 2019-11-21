@@ -120,7 +120,7 @@ int findPath(int fromX, int fromY, int toX, int toY){
   
 bool lineSight(int fromX, int fromY, int toX, int toY){
   int y = (toY-fromY), x = (toX-fromX);
-  int y2 = y*y; int x2 = x*x; int sqt = sqrt(x2+y2);
+  int y2 = y*y, x2 = x*x, sqt = sqrt(x2+y2);
   if (sqt > PSIZE) return false;
   bool xHigh = (abs(x) >abs(y));
   int yInc = 0, xInc = 0, high, slope;
@@ -164,8 +164,8 @@ void Piece::enemyMove(){
   else{
     if (lineSight(xCoor,yCoor,player.getX(),player.getY())){
       moveTowards(player.getX(),player.getY());
-      status = "The goblin sees you";
-    }else status = "";
+      //status = "The goblin sees you";
+    }//else status = "";
     int dir = findPath(xCoor,yCoor,toX,toY);
     if (dir == 1) moveLD();
     else if (dir == 2) moveDown();

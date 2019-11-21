@@ -19,8 +19,8 @@ class Piece{
   void         moveTowards(int x, int y);
   //Get Values
   std::string  getStatus();
-  char         getChar();
   std::string  getName();
+  char         getChar();
   int          getX();
   int          getY();
   int          absDist(Piece* p);
@@ -42,15 +42,9 @@ class Piece{
   void         enemyMove();
 };
 
-//bool lineSight(int fX, int fY, int tX, int tY);
-
 void playerMove(Piece* p);
 
 void aiMove(Piece* p);
-
-//int dirOrder(int dir, int ind);
-
-//int findPath(int fromX, int fromY, int toX, int toY);
 
 extern Piece player;
 extern Piece enemy;
