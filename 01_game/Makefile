@@ -33,4 +33,3 @@ test :
 
 install : ${EXDEPS}
 	${GPP} ${FLAG} -o ${BIN}${EXEC} ${OBJ}
-	source ~/.bash_profile

@@ -2,9 +2,6 @@
 //max.nibler@gmail.com
 //https://github.com/maxnibler/
 
-#include <iostream>
-#include <stdio.h>
-#include <fstream>
 #include <ncurses.h>
 #include <math.h>
 #include "input.h"
