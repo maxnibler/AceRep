@@ -1,3 +1,5 @@
+#include <string>
+
 class charStack{
  private:
   int top;
@@ -19,3 +21,11 @@ void stdSeed();
 void seed(int x);
 
 int roll(int dX);
+
+void openLog(bool append);
+
+void closeLog();
+
+void logString(std::string logstr);
+
+extern bool logging;

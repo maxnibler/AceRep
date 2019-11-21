@@ -1,11 +1,11 @@
 EXDEPS  = ${OBJ}
-GENDEPS = utils logging input screen piece pathing
+GENDEPS = utils input screen piece pathing
 CPP     = ${GENDEPS:=.cpp} main.cpp
 OBJ     = ${GENDEPS:=.o} main.o
 HEAD    = ${GENDEPS:=.h}
 GPP     = clang++ -std=gnu++17
 FLAG    = -Wall -Wextra -Wpedantic -Wold-style-cast
-LINK    = -lncurses -Wall -Wextra -Wpedantic -Wold-style-cast
+LINK    = -lncurses
 EXEC    = game
 MESS    = "generic commit"
 GIT     = git commit -am
@@ -32,7 +32,7 @@ deps : ${OBJ}
 
 test :
 	./${EXEC} -l
-	cat game.log
+	cat Files/game.log
 
 install : ${EXDEPS}
 	${GPP} ${FLAG} -o ${BIN}${EXEC} ${OBJ}

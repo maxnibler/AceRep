@@ -6,7 +6,6 @@
 #include <ncurses.h>
 #include "screen.h"
 #include "input.h"
-#include "logging.h"
 
 using namespace std;
 
@@ -31,12 +30,12 @@ void moveTo(int x, int y, char rep){
 }
 
 void initPieces(){
-  player.setLocation(30, 10, '@');
+  player.setLocation(40, 15, '@');
   player.setStats(1,1,"Player");
   enemy.setLocation(10, 10, 'G');
   enemy.setStats(1,1,"Goblin");
-  enemy.moveTowards(30,10);
-  moveTo(30, 10, '@');
+  enemy.moveTowards(11,11);
+  moveTo(40, 15, '@');
   moveTo(10,10,'G');
 }
 
@@ -44,16 +43,16 @@ void initLocation(){
   for (int i = 0; i < WIDTH; i++){
     for (int j = 0; j < HEIGHT; j++){
       if (i == 0 || i == WIDTH - 1){
-	location[i][j].setBase(' ');
+	location[i][j].setBase('#');
       }else if (j == 1 || j == HEIGHT - 1){
-	location[i][j].setBase(' ');
+	location[i][j].setBase('#');
       }else{
-	location[i][j].setBase('.');
+	location[i][j].setBase(' ');
       }
     }
   }
-  makeRoom(0,2,WIDTH-1,HEIGHT-1);
-  makeRoom(20,5,40,20);
+  makeRoom(35,10,45,20);
+  makeRoom(5,5,15,15);
 }
 
 int makeWall(bool vert, int x, int y, int len){
@@ -77,6 +76,11 @@ int makeRoom(int x1, int y1, int x2, int y2){
   makeWall(0,x1,y1,x2-x1+1);
   makeWall(1,x2,y1+1,y2-y1);
   makeWall(0,x1,y2,x2-x1+1);
+  for (int i = x1+1; i < x2; i++){
+    for (int j = y1+1; j < y2; j++){
+      location[i][j].setBase('.');
+    }
+  }
   return 0;
 }
 
