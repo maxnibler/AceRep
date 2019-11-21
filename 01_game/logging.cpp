@@ -23,10 +23,10 @@ void openLog(bool append){
 }
 
 void closeLog(){
-  fprintf(logfile,"Game exited normally\n");
+  fprintf(logfile,"\nGame exited normally\n");
   fclose(logfile);
 }
 
 void logString(string logstr){
-  fprintf(logfile, "%4d| %s\n", count++, logstr.c_str());
+  fprintf(logfile, "  %4d| %s", count++, logstr.c_str());
 }

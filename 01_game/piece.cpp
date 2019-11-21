@@ -110,9 +110,13 @@ void Piece::moveDir(int dir){
     newX = xCoor;
     newY = yCoor;
   }
-  from_to(xCoor, yCoor, newX, newY);
-  xCoor = newX;
-  yCoor = newY;
+  if (lookSym(newX, newY) != '.'){
+    status = name+"'s movement was blocked";
+  }else{
+    from_to(xCoor, yCoor, newX, newY);
+    xCoor = newX;
+    yCoor = newY;
+  }
 }
 
 void Piece::inpMove(char dir){

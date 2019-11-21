@@ -19,7 +19,7 @@ void from_to(int xInit, int yInit, int xDest, int yDest){
   if (logging){
     string logs;
     logs = "  <"+to_string(xInit)+", "+to_string(yInit)+"> to <"
-      +to_string(xDest)+", "+to_string(yDest)+">";
+      +to_string(xDest)+", "+to_string(yDest)+">\n";
     logString(logs);
   }
   char temp = getSymbol(xInit, yInit);
