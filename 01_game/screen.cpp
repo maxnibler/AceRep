@@ -31,8 +31,10 @@ void moveTo(int x, int y, char rep){
 }
 
 void initPieces(){
-  player.setLocation(30, 10, '@', "Player");
-  enemy.setLocation(10, 10, 'G', "Goblin");
+  player.setLocation(30, 10, '@');
+  player.setStats(1,1,"Player");
+  enemy.setLocation(10, 10, 'G');
+  enemy.setStats(1,1,"Goblin");
   enemy.moveTowards(30,10);
   moveTo(30, 10, '@');
   moveTo(10,10,'G');
@@ -104,8 +106,8 @@ void printMessage(int row, string mess){
 }
 
 void refreshScreen(){
-  aiMove(&enemy);
-  playerMove(&player);
+  aiTurn(&enemy);
+  playerTurn(&player);
   printMessage(0, enemy.getStatus());
   printMessage(1, player.getStatus());
   setScreen();

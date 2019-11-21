@@ -61,14 +61,15 @@ void Piece::attackDir(){
   if (sym == 'G') attack(&enemy);
 }
 
-void playerMove(Piece* p){
+void playerTurn(Piece* p){
   char dir = getInput();
+  if (dir == 'p') return;
   if (dir == '+'){
     p->attackDir();
   }else
   p->inpMove(dir);
 }
 
-void aiMove(Piece* p){
+void aiTurn(Piece* p){
   p->enemyMove();
 }

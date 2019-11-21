@@ -158,11 +158,10 @@ void Piece::moveTowards(int x, int y){
 void Piece::enemyMove(){
   int abs = absDist(&player);
   if (abs == 1) attack(&player);
-  else if (abs > 30) wait();
+  else if (abs > 30) moveDir(5);
   else{
     if (lineSight(xCoor,yCoor,player.getX(),player.getY())){
       moveTowards(player.getX(),player.getY());
-      //status = "The goblin sees you";
     }else if (logging){
       string logs = name+" Cannot see Player";
       logString(logs);
@@ -172,15 +171,7 @@ void Piece::enemyMove(){
       logString(logs);
     }
     int dir = findPath(xCoor,yCoor,toX,toY);
-    moveDir(dir);/*
-    if (dir == 1) moveLD();
-    else if (dir == 2) moveDown();
-    else if (dir == 3) moveRD();
-    else if (dir == 4) moveLeft();
-    else if (dir == 6) moveRight();
-    else if (dir == 7) moveLU();
-    else if (dir == 8) moveUp();
-    else if (dir == 9) moveRU();*/
+    moveDir(dir);
   }
 }    
       

@@ -39,13 +39,16 @@ int Piece::absDist(Piece* p){
 |    Set Values    |
 ------------------*/
 
-void Piece::setLocation(int x, int y, char o, string n){
+void Piece::setLocation(int x, int y, char o){
   xCoor = x;
   yCoor = y;
   rep = o;
+}
+
+void Piece::setStats(int s, int d, string n){
   name = n;
-  speed = 1;
-  dmg = 1;
+  speed = s;
+  dmg = d;
 }
 
 /*----------------------
@@ -76,10 +79,6 @@ int Piece::getY(){
 |    Positional Commands    |
 ---------------------------*/
 
-void Piece::wait(){
-  from_to(xCoor, yCoor, xCoor, yCoor);
-}
-
 void Piece::moveDir(int dir){
   int newX = xCoor, newY = yCoor;
   if (dir == 1){
@@ -109,8 +108,13 @@ void Piece::moveDir(int dir){
   }else if (dir == 5){
     newX = xCoor;
     newY = yCoor;
+    if (logging){
+      string logs = name+" Stays in place\n";
+      logString(logs);
+    }
   }
   if (lookSym(newX, newY) != '.'){
+    if (dir != 5)
     status = name+"'s movement was blocked";
   }else{
     from_to(xCoor, yCoor, newX, newY);
@@ -134,7 +138,7 @@ void Piece::inpMove(char dir){
 
 void Piece::attack(Piece* p){
   if (logging){
-    string logs = name+" attacks: "+p->getName();
+    string logs = name+" attacks: "+p->getName()+"\n";
     logString(logs);
   }
   status = name+" attacks "+p->getName()+" for "

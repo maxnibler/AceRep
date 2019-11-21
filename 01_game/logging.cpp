@@ -23,7 +23,7 @@ void openLog(bool append){
 }
 
 void closeLog(){
-  fprintf(logfile,"\nGame exited normally\n");
+  fprintf(logfile,"Game exited normally\n");
   fclose(logfile);
 }
 

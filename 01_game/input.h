@@ -15,7 +15,8 @@ class Piece{
   std::string  name;
  public:
   //Set Values
-  void         setLocation(int x, int y, char o, std::string n);
+  void         setLocation(int x, int y, char o);
+  void         setStats(int s, int d, std::string n);
   void         moveTowards(int x, int y);
   //Get Values
   std::string  getStatus();
@@ -35,9 +36,9 @@ class Piece{
   void         enemyMove();
 };
 
-void playerMove(Piece* p);
+void playerTurn(Piece* p);
 
-void aiMove(Piece* p);
+void aiTurn(Piece* p);
 
 extern Piece player;
 extern Piece enemy;
