@@ -19,9 +19,11 @@ all : ${EXDEPS}
 
 clean :
 	rm ${EXEC}
+	rm game.log
 
 spotless :
 	rm ${OBJ} ${EXEC}
+	rm game.log
 
 ci :
 	${GIT} ${MESS}

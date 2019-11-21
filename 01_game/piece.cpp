@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <stdio.h>
+#include <stdlib.h> 
 #include <fstream>
 #include <ncurses.h>
 #include <math.h>
@@ -79,92 +80,39 @@ void Piece::wait(){
   from_to(xCoor, yCoor, xCoor, yCoor);
 }
 
-void Piece::moveUp(){
-  int newCoor = yCoor - speed;
-  if (lookSym(xCoor, newCoor) != '.'){
-    status = name+"'s movement was blocked";
-  }else{
-    from_to(xCoor, yCoor, xCoor, newCoor);
-    yCoor = newCoor;
+void Piece::moveDir(int dir){
+  int newX = xCoor, newY = yCoor;
+  if (dir == 1){
+    newX = xCoor-speed;
+    newY = yCoor+speed;
+  }else if (dir == 2){
+    newX = xCoor;
+    newY = yCoor+speed;
+  }else if (dir == 3){
+    newX = xCoor+speed;
+    newY = yCoor+speed;
+  }else if (dir == 4){
+    newX = xCoor-speed;
+    newY = yCoor;
+  }else if (dir == 6){
+    newX = xCoor+speed;
+    newY = yCoor;
+  }else if (dir == 7){
+    newX = xCoor-speed;
+    newY = yCoor-speed;
+  }else if (dir == 8){
+    newX = xCoor;
+    newY = yCoor-speed;
+  }else if (dir == 9){
+    newX = xCoor+speed;
+    newY = yCoor-speed;
+  }else if (dir == 5){
+    newX = xCoor;
+    newY = yCoor;
   }
-}
-
-void Piece::moveDown(){
-  int newCoor = yCoor + speed;
-  if (lookSym(xCoor, newCoor) != '.'){
-    status = name+"'s movement was blocked";
-  }else{
-    from_to(xCoor, yCoor, xCoor, newCoor);
-    yCoor = newCoor;
-  }
-}
-
-void Piece::moveLeft(){
-  int newX = xCoor - speed;
-  if (lookSym(newX, yCoor) != '.'){
-    status = name+"'s movement was blocked";
-  }else{
-    from_to(xCoor, yCoor, newX, yCoor);
-    xCoor = newX;
-  }
-}
-
-void Piece::moveRight(){
-  int newX = xCoor + speed;
-  if (lookSym(newX, yCoor) != '.'){
-    status = name+"'s movement was blocked";
-  }else{
-    from_to(xCoor, yCoor, newX, yCoor);
-    xCoor = newX;
-  }
-}
-
-void Piece::moveRU(){
-  int newY = yCoor - speed;
-  int newX = xCoor + speed;
-  if (lookSym(newX, newY) != '.'){
-    status = name+"'s movement was blocked";
-  }else{
-    from_to(xCoor, yCoor, newX, newY);
-    xCoor = newX;
-    yCoor = newY;
-  }
-}
-
-void Piece::moveLU(){
-  int newY = yCoor - speed;
-  int newX = xCoor - speed;
-  if (lookSym(newX, newY) != '.'){
-    status = name+"'s movement was blocked";
-  }else{
-    from_to(xCoor, yCoor, newX, newY);
-    xCoor = newX;
-    yCoor = newY;
-  }
-}
-
-void Piece::moveLD(){
-  int newY = yCoor + speed;
-  int newX = xCoor - speed;
-  if (lookSym(newX, newY) != '.'){
-    status = name+"'s movement was blocked";
-  }else{
-    from_to(xCoor, yCoor, newX, newY);
-    xCoor = newX;
-    yCoor = newY;
-  }
-}
-
-void Piece::moveRD(){
-  int newY = yCoor + speed;
-  int newX = xCoor + speed;
-  if (lookSym(newX, newY) != '.'){
-    status = name+"'s movement was blocked";
-  }else{
-    from_to(xCoor, yCoor, newX, newY);
-    xCoor = newX;
-    yCoor = newY;
-  }
+  from_to(xCoor, yCoor, newX, newY);
+  xCoor = newX;
+  yCoor = newY;
 }
 
 void Piece::inpMove(char dir){
@@ -172,15 +120,8 @@ void Piece::inpMove(char dir){
     string logs = name+" moves:";
     logString(logs);
   }
-  if (dir == '8') moveUp();
-  if (dir == '4') moveLeft();
-  if (dir == '2') moveDown();
-  if (dir == '6') moveRight();
-  if (dir == '7') moveLU();
-  if (dir == '9') moveRU();
-  if (dir == '1') moveLD();
-  if (dir == '3') moveRD();
-  if (dir == '5') wait();    
+  const char* d = new char(dir);
+  moveDir(atoi(d));   
 }
 
 /*-------------------------

@@ -172,6 +172,7 @@ void Piece::enemyMove(){
       logString(logs);
     }
     int dir = findPath(xCoor,yCoor,toX,toY);
+    moveDir(dir);/*
     if (dir == 1) moveLD();
     else if (dir == 2) moveDown();
     else if (dir == 3) moveRD();
@@ -179,7 +180,7 @@ void Piece::enemyMove(){
     else if (dir == 6) moveRight();
     else if (dir == 7) moveLU();
     else if (dir == 8) moveUp();
-    else if (dir == 9) moveRU();
+    else if (dir == 9) moveRU();*/
   }
 }    
       

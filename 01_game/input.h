@@ -28,14 +28,7 @@ class Piece{
   int          pieceLeft(int x);
   //Commands
   void         inpMove(char dir);
-  void         moveUp();
-  void         moveDown();
-  void         moveLeft();
-  void         moveRight();
-  void         moveRU();
-  void         moveLU();
-  void         moveLD();
-  void         moveRD();
+  void         moveDir(int dir);
   void         wait();
   void         attack(Piece* p);
   void         attackDir();
