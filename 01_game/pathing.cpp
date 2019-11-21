@@ -6,7 +6,6 @@
 #include <math.h>
 #include "input.h"
 #include "screen.h"
-#include "roll.h"
 #include "logging.h"
 
 using namespace std;
@@ -163,15 +162,18 @@ void Piece::enemyMove(){
     if (lineSight(xCoor,yCoor,player.getX(),player.getY())){
       moveTowards(player.getX(),player.getY());
     }else if (logging){
-      string logs = name+" Cannot see Player";
+      string logs = name+" Cannot see Player\n";
       logString(logs);
     }
     if (logging){
       string logs = name+" moves:";
       logString(logs);
     }
-    int dir = findPath(xCoor,yCoor,toX,toY);
-    moveDir(dir);
+    if (toX == xCoor && toY == yCoor) moveDir(5);
+    else{
+      int dir = findPath(xCoor,yCoor,toX,toY);
+      moveDir(dir);
+    }
   }
 }    
       

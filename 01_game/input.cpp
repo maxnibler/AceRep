@@ -5,7 +5,6 @@
 #include <ncurses.h>
 #include "input.h"
 #include "screen.h"
-#include "roll.h"
 
 using namespace std;
 

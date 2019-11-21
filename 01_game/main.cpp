@@ -9,7 +9,6 @@
 #include <fstream>
 #include <ncurses.h>
 #include <unistd.h>
-#include "roll.h"
 #include "input.h"
 #include "screen.h"
 #include "logging.h"

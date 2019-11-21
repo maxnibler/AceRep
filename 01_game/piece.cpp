@@ -10,7 +10,6 @@
 #include <math.h>
 #include "input.h"
 #include "screen.h"
-#include "roll.h"
 #include "logging.h"
 
 using namespace std;
@@ -81,6 +80,10 @@ int Piece::getY(){
 
 void Piece::moveDir(int dir){
   int newX = xCoor, newY = yCoor;
+  if (logging){
+    string logs = "In direction: "+to_string(dir)+"\n";
+    logString(logs);
+  }
   if (dir == 1){
     newX = xCoor-speed;
     newY = yCoor+speed;
@@ -114,7 +117,7 @@ void Piece::moveDir(int dir){
     }
   }
   if (lookSym(newX, newY) != '.'){
-    if (dir != 5)
+    if (dir != 5 && dir != 0)
     status = name+"'s movement was blocked";
   }else{
     from_to(xCoor, yCoor, newX, newY);

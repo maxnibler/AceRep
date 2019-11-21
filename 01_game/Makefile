@@ -1,5 +1,5 @@
 EXDEPS  = ${OBJ}
-GENDEPS = roll logging input screen charStack piece pathing
+GENDEPS = utils logging input screen piece pathing
 CPP     = ${GENDEPS:=.cpp} main.cpp
 OBJ     = ${GENDEPS:=.o} main.o
 HEAD    = ${GENDEPS:=.h}

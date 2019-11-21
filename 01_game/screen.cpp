@@ -52,10 +52,8 @@ void initLocation(){
       }
     }
   }
-  makeWall(true,0,0,HEIGHT);
-  makeWall(true,WIDTH-1,0,HEIGHT);
-  makeWall(false,0,HEIGHT-1,WIDTH);
-  makeWall(false,0,2,WIDTH);
+  makeRoom(0,2,WIDTH-1,HEIGHT-1);
+  makeRoom(20,5,40,20);
 }
 
 int makeWall(bool vert, int x, int y, int len){
@@ -73,6 +71,14 @@ int makeWall(bool vert, int x, int y, int len){
   }
   return 0;
 }    
+
+int makeRoom(int x1, int y1, int x2, int y2){
+  makeWall(1,x1,y1+1,y2-y1);
+  makeWall(0,x1,y1,x2-x1+1);
+  makeWall(1,x2,y1+1,y2-y1);
+  makeWall(0,x1,y2,x2-x1+1);
+  return 0;
+}
 
 char getSymbol(int x, int y){
   return location[x][y].pop();
