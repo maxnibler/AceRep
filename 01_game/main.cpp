@@ -11,7 +11,6 @@
 #include <unistd.h>
 #include "input.h"
 #include "screen.h"
-#include "logging.h"
 
 bool logging;
 bool active;

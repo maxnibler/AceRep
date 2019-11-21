@@ -44,7 +44,7 @@ void initLocation(){
     for (int j = 0; j < HEIGHT; j++){
       if (i == 0 || i == WIDTH - 1){
 	location[i][j].setBase('#');
-      }else if (j == 1 || j == HEIGHT - 1){
+      }else if (j == 0 || j == HEIGHT - 1){
 	location[i][j].setBase('#');
       }else{
 	location[i][j].setBase(' ');
@@ -53,6 +53,8 @@ void initLocation(){
   }
   makeRoom(35,10,45,20);
   makeRoom(5,5,15,15);
+  makePath(10,15,10,18);
+  makePath(10,18,35,18);
 }
 
 int makeWall(bool vert, int x, int y, int len){
@@ -84,6 +86,20 @@ int makeRoom(int x1, int y1, int x2, int y2){
   return 0;
 }
 
+int makePath(int x1, int y1, int x2, int y2){
+  if (x1 != x2 && y1 != y2) return -1;
+  else if (x1 != x2){
+    for (int i = 0; i <= (x2-x1); i++){
+      location[x1+i][y1].setBase('.');
+    }
+  }else{
+    for (int i = 0; i <= (y2-y1); i++){
+      location[x1][y1+i].setBase('.');
+    }
+  }
+  return 0;
+}
+
 char getSymbol(int x, int y){
   return location[x][y].pop();
 }
@@ -94,9 +110,9 @@ char lookSym(int x, int y){
 
 void setScreen(){
   move(0,0);
-  for (int i = 2; i < HEIGHT; i++){
+  for (int i = 0; i < HEIGHT; i++){
     for (int j = 0; j < WIDTH; j++){
-      move(i,j);
+      move(i+2,j);
       addch(lookSym(j,i));
     }
   }

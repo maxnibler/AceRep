@@ -7,6 +7,7 @@ GPP     = clang++ -std=gnu++17
 FLAG    = -Wall -Wextra -Wpedantic -Wold-style-cast
 LINK    = -lncurses
 EXEC    = game
+LOG     = Files/game.log
 MESS    = "generic commit"
 GIT     = git commit -am
 BIN     = ~/.Scripts/
@@ -19,11 +20,11 @@ all : ${EXDEPS}
 
 clean :
 	rm ${EXEC}
-	rm game.log
+	rm ${LOG}
 
 spotless :
 	rm ${OBJ} ${EXEC}
-	rm game.log
+	rm ${LOG}
 
 ci :
 	${GIT} ${MESS}
@@ -31,8 +32,11 @@ ci :
 deps : ${OBJ}
 
 test :
+	./${EXEC}
+
+debug :
 	./${EXEC} -l
-	cat Files/game.log
+	cat ${LOG}
 
 install : ${EXDEPS}
 	${GPP} ${FLAG} -o ${BIN}${EXEC} ${OBJ}

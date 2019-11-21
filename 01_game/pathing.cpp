@@ -6,7 +6,6 @@
 #include <math.h>
 #include "input.h"
 #include "screen.h"
-#include "logging.h"
 
 using namespace std;
 #define PSIZE 41
